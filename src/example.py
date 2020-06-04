@@ -25,8 +25,15 @@ def foo(a,b=10):
 @multimethod(float, int)
 @multimethod(float, int,int)
 def foo(a,b=10,c=10):
-
     return a+b+c
+
+
+#  Add support for named argumants `foo(a=1, b=2)`.
+@multimethod()
+def foo(a=1,b=2):
+    return a+b
+
+
 
 
 

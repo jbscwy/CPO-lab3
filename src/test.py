@@ -14,7 +14,7 @@ class TestMultimethod(unittest.TestCase):
 
          self.assertEqual(foo(1,1),2)
          self.assertEqual(foo(1.0, 1.0), 0.0)
-         self.assertEqual(foo('1', '1'), '11')
+         self.assertEqual(foo('he', 'llo'), 'hello')
          self.assertEqual(foo('1', 10), '110')
 
     # 2.Optional and named parameters
@@ -26,6 +26,9 @@ class TestMultimethod(unittest.TestCase):
         self.assertEqual(foo(1.0,9,10), 20)
         self.assertEqual(foo(1.0), 21.0)
         self.assertEqual(foo(1.0,9),20)
+
+    def test_named_object(self):
+        self.assertEqual(foo(),3)
 
 
 

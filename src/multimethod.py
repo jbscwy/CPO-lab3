@@ -1,5 +1,4 @@
 registry = {}
-
 class MultiMethod(object):
     # Create a function
     def __init__(self, name):
@@ -18,10 +17,15 @@ class MultiMethod(object):
             raise TypeError("duplicate registration")
         self.typemap[types] = function
 
+
 #Returns a multimethod object and calls the register method
 def multimethod(*types):
         def register(function):
             # add
+            #equivalent to:
+            # if hasattr(function,"__lastreg__"):
+            #      function =function.__lastreg__
+
             function = getattr(function, "__lastreg__", function)
             name = function.__name__
             mm = registry.get(name)
@@ -31,5 +35,4 @@ def multimethod(*types):
             # add
             mm.__lastreg__ = function
             return mm
-
         return register
