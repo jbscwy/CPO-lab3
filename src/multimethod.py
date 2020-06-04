@@ -1,4 +1,6 @@
 registry = {}
+
+
 class MultiMethod(object):
     # Create a function
     def __init__(self, name):
@@ -6,11 +8,19 @@ class MultiMethod(object):
         self.typemap = {}
     #Make the object itself callable
     def __call__(self, *args):
-        types = tuple(arg.__class__ for arg in args) # a generator expression!
+        types = tuple((arg.__class__) for arg in args) # a generator expression!
         function = self.typemap.get(types)
         if function is None:
             raise TypeError("no match")
         return function(*args)
+    # Input values are supported as key-value structures
+    def __call__(self,**kwargs):
+        types = tuple((kwargs[key].__class__) for key in kwargs)  # a generator expression!
+        function = self.typemap.get(types)
+        if function is None:
+            raise TypeError("no match")
+        return function(**kwargs)
+
     #Add a new function to the type diagram
     def register(self, types, function):
         if types in self.typemap:
@@ -22,10 +32,6 @@ class MultiMethod(object):
 def multimethod(*types):
         def register(function):
             # add
-            #equivalent to:
-            # if hasattr(function,"__lastreg__"):
-            #      function =function.__lastreg__
-
             function = getattr(function, "__lastreg__", function)
             name = function.__name__
             mm = registry.get(name)

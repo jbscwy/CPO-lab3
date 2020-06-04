@@ -1,10 +1,6 @@
-
-
-
-
 import unittest
 
-from src.example import foo
+from src.example import foo, A, B
 
 
 class TestMultimethod(unittest.TestCase):
@@ -27,9 +23,11 @@ class TestMultimethod(unittest.TestCase):
         self.assertEqual(foo(1.0), 21.0)
         self.assertEqual(foo(1.0,9),20)
 
+    #3.support for named argumants
     def test_named_object(self):
         self.assertEqual(foo(),3)
-
+        self.assertEqual(foo(a=1,b=2),3)
+        self.assertEqual(foo(a='1', b=10), '110')
 
 
 if __name__ == '__main__':
