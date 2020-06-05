@@ -1,6 +1,8 @@
 import unittest
 
-from example import *
+
+
+from src.example import *
 
 
 class TestMultimethod(unittest.TestCase):
@@ -25,6 +27,13 @@ class TestMultimethod(unittest.TestCase):
     def test_named_object(self):
         self.assertEqual(foo(a=1, b=2), 3)
         self.assertEqual(foo(a='1', b=10), '110')
+
+
+    #4.inherit
+    def test_inherit(self):
+        self.assertEqual(foo(A(),A()),'works')
+        self.assertEqual(foo(A(), B()), 'works')
+
 
 
 if __name__ == '__main__':
