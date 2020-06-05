@@ -40,6 +40,19 @@ class A(object):
 class B(A):
   pass
 
+class C(B):
+  pass
+
+class D(object):
+  pass
+
+class E(A,D):
+  pass
+
+
+@multimethod(A,D)
+def foo(arg1,arg2):
+   return 'works'
 
 @multimethod(A,A)
 def foo(arg1,arg2):

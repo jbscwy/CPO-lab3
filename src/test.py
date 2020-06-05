@@ -33,6 +33,8 @@ class TestMultimethod(unittest.TestCase):
     def test_inherit(self):
         self.assertEqual(foo(A(),A()),'works')
         self.assertEqual(foo(A(), B()), 'works')
+        self.assertEqual(foo(A(), C()), 'works')
+        self.assertEqual(foo(E(), E()), 'works')
 
 
 
